@@ -1,0 +1,27 @@
+---
+export interface Props {
+  title: string;
+  company: string;
+  date: string;
+  location: string;
+  description: string[];
+}
+
+const { title, company, date, location, description } = Astro.props;
+---
+
+<div class="colorful-card p-6">
+  <header class="flex justify-between items-baseline mb-3">
+    <div>
+      <h3 class="font-bold text-lg text-primary">{title}</h3>
+      <p class="text-sm font-medium text-accent">{company}</p>
+    </div>
+    <div class="text-right text-xs text-secondary">
+      <p>{date}</p>
+      <p>{location}</p>
+    </div>
+  </header>
+  <ul class="mt-4 list-disc list-inside space-y-2 text-sm text-secondary">
+    {description.map((item) => <li>{item}</li>)}
+  </ul>
+</div>
