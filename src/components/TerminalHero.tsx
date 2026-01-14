@@ -112,7 +112,7 @@ const TerminalHero: React.FC = () => {
         output = (
           <div className="mt-2 mb-2">
             <img
-              src="/yo.jpeg"
+              src="yo.jpeg"
               alt="Oscar Sinuco"
               className="w-32 h-32 rounded md:w-40 md:h-40 border-2 shadow-lg"
               style={{ 
