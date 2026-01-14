@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 const Starfield: React.FC = () => {
   const [mounted, setMounted] = useState(false);
 
-  const { stars, nebulas } = useMemo(() => {
+  const { stars, distantStars, nebulas } = useMemo(() => {
     const rand = (min: number, max: number) => Math.random() * (max - min) + min;
 
     // Estrellas (Partículas de viaje)
@@ -20,6 +20,17 @@ const Starfield: React.FC = () => {
       };
     });
 
+    // Estrellas distantes (estáticas o muy lentas)
+    const distantStarArray = Array.from({ length: 300 }, (_, i) => ({
+      id: i + 1000,
+      x: rand(0, 100),
+      y: rand(0, 100),
+      size: rand(0.5, 1.5),
+      opacity: rand(0.1, 0.4),
+      twinkleDuration: rand(3, 8),
+      twinkleDelay: rand(0, 8),
+    }));
+
     // Nebulosas / Nubes grises
     const nebulaArray = Array.from({ length: 3 }, (_, i) => ({
       id: i + 500,
@@ -30,7 +41,7 @@ const Starfield: React.FC = () => {
       color: i === 0 ? 'var(--color-primary)' : 'var(--color-secondary)',
     }));
 
-    return { stars: starArray, nebulas: nebulaArray };
+    return { stars: starArray, distantStars: distantStarArray, nebulas: nebulaArray };
   }, []);
 
   useEffect(() => {
@@ -57,6 +68,23 @@ const Starfield: React.FC = () => {
               animationDelay: `${neb.delay}s`,
               // El color base se asigna aquí pero se sobreescribe en CSS para modo claro
               backgroundColor: `rgb(${neb.color})`, 
+            }}
+          />
+        ))}
+
+        {/* ESTRELLAS DISTANTES (estáticas con twinkling) */}
+        {distantStars.map((star) => (
+          <div
+            key={star.id}
+            className="absolute rounded-full animate-twinkle distant-star-element"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: star.opacity,
+              animationDuration: `${star.twinkleDuration}s`,
+              animationDelay: `${star.twinkleDelay}s`,
             }}
           />
         ))}
@@ -94,6 +122,11 @@ const Starfield: React.FC = () => {
           100% { transform: translateY(120vh) scale(1.3); opacity: 0; }
         }
 
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.2); }
+        }
+
         .animate-star-travel {
           animation: star-travel linear infinite;
           will-change: transform;
@@ -104,16 +137,25 @@ const Starfield: React.FC = () => {
           will-change: transform;
         }
 
+        .animate-twinkle {
+          animation: twinkle ease-in-out infinite;
+          will-change: opacity, transform;
+        }
+
         /* --- MODO DARK (Espacio de Neon) --- */
         [data-theme="dark"] .nebula-element {
           mix-blend-mode: screen;
           filter: blur(120px);
           opacity: 0.12;
         }
-        
+
         [data-theme="dark"] .star-element {
           background-color: rgb(var(--color-text-base));
           box-shadow: 0 0 5px rgb(var(--color-text-base));
+        }
+
+        [data-theme="dark"] .distant-star-element {
+          background-color: rgb(var(--color-text-base));
         }
 
         /* --- MODO LIGHT (Nubes Grises / Bruma) --- */
@@ -128,6 +170,10 @@ const Starfield: React.FC = () => {
         [data-theme="light"] .star-element {
           background-color: rgb(var(--color-text-muted));
           box-shadow: none;
+        }
+
+        [data-theme="light"] .distant-star-element {
+          background-color: rgb(var(--color-text-muted));
         }
       `}</style>
     </>

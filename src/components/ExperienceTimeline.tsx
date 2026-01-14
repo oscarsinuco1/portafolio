@@ -9,8 +9,8 @@ import { timelineThemes, uiColors } from '../styles/colorTokens';
 const { VerticalTimeline, VerticalTimelineElement } = VerticalTimelineComponent || {};
 
 const ExperienceTimeline: React.FC = () => {
-    return (
-        <div className="mt-12 px-4 md:px-0">
+     return (
+         <div className="mt-12 px-2 sm:px-4 md:px-0">
             <VerticalTimeline lineColor={uiColors.timeline.line}>
                 {experienceData.map((item, index) => {
                     const theme = Object.values(timelineThemes)[index % Object.values(timelineThemes).length];
@@ -19,7 +19,7 @@ const ExperienceTimeline: React.FC = () => {
                             key={index}
                             className="vertical-timeline-element--work"
                             contentStyle={{
-                                padding: '1rem',
+                                padding: '0.75rem',
                                 background: 'rgba(var(--color-bg-surface), 0.6)',
                                 backdropFilter: 'blur(12px)',
                                 border: `1px solid ${theme.primary}`,
@@ -30,7 +30,7 @@ const ExperienceTimeline: React.FC = () => {
                             }}
                             contentArrowStyle={{ borderRight: `7px solid ${theme.primary}` }}
                             date={item.date}
-                            dateClassName="text-accent/90 font-bold mx-0 md:mx-4 !opacity-100 text-sm md:text-base translation-y-1 drop-shadow-[0_0_5px_rgba(var(--color-primary),0.5)]"
+                            dateClassName="text-accent/90 font-bold mx-0 md:mx-4 !opacity-100 text-xs sm:text-sm md:text-base translation-y-1 drop-shadow-[0_0_5px_rgba(var(--color-primary),0.5)]"
                             iconStyle={{
                                 background: theme.iconBg,
                                 color: theme.primary,

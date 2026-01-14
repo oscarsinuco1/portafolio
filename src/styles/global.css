@@ -300,6 +300,10 @@
   .animate-slide-up {
     animation: slide-up-quick 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
+
+  .animate-slide-down {
+    animation: slide-down 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
 }
 
 /* Keyframes Definitions */
@@ -316,6 +320,11 @@
 
 @keyframes slide-up-quick {
   0% { opacity: 0; transform: translateY(100px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  0% { opacity: 0; transform: translateY(-20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
