@@ -197,7 +197,6 @@
 /* Section Titles */
 .section-title {
   @apply text-4xl md:text-5xl font-black text-center mb-16 uppercase tracking-widest relative inline-block;
-  color: transparent;
   -webkit-text-stroke: 1px rgba(var(--color-primary), 0.8);
   text-shadow: 0 0 20px rgba(var(--color-primary), 0.5);
   background: none;

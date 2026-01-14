@@ -3,6 +3,8 @@
 import "../styles/global.css";
 import ThemeToggle from "../components/ThemeToggle";
 import MobileMenu from "../components/MobileMenu";
+import Starfield from "../components/Starfield.tsx";
+import WelcomeMessage from "../components/WelcomeMessage.tsx";
 
 // Props que el layout puede recibir.
 export interface Props {
@@ -35,7 +37,7 @@ const {
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/portafolio/icons/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -46,63 +48,113 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body class="transition-colors duration-300 relative bg-scanlines">
-    <header
-      class="sticky top-0 z-40 w-full flex-none bg-base/80 backdrop-blur-md transition-colors duration-300 border-b border-white/5 dark:border-transparent supports-[backdrop-filter]:bg-base/60"
-    >
-      <nav class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <a class="flex items-center gap-2 group" href="/">
-            <img
-              src="yo.jpeg"
-              alt="Oscar Sinuco"
-              class="w-10 h-10 rounded-full object-cover border-2 border-primary/50 group-hover:border-primary transition-colors"
-            />
-            <span class="text-xl font-bold text-primary hidden sm:block"
-              >Oscar Esneyder Sinuco Tirado</span
+  <body class="transition-colors duration-300 relative bg-scanlines overflow-hidden">
+    <Starfield client:load />
+    <WelcomeMessage client:load />
+    <div class="opacity-0 pointer-events-none" id="main-content">
+      <header
+        class="sticky top-0 z-40 w-full flex-none bg-base/80 backdrop-blur-md transition-colors duration-300 border-b border-white/5 dark:border-transparent supports-[backdrop-filter]:bg-base/60"
+      >
+        <nav class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <a class="flex items-center gap-2 group" href="/portafolio/">
+              <img
+                src="yo.jpeg"
+                alt="Oscar Sinuco"
+                class="w-10 h-10 rounded-full object-cover border-2 border-primary/50 group-hover:border-primary transition-colors"
+              />
+              <span class="text-xl font-bold text-primary hidden sm:block"
+                >Oscar Esneyder Sinuco Tirado</span
+              >
+            </a>
+            <ul
+              class="hidden md:flex items-center space-x-8 text-sm font-medium text-base"
             >
-          </a>
-          <ul
-            class="hidden md:flex items-center space-x-8 text-sm font-medium text-base"
-          >
-            <li>
-              <a class="hover:text-primary transition-colors" href="#experience"
-                >Experiencia</a
-              >
-            </li>
-            <li>
-              <a class="hover:text-primary transition-colors" href="#projects"
-                >Proyectos</a
-              >
-            </li>
-            <li>
-              <a class="hover:text-primary transition-colors" href="#skills"
-                >Habilidades</a
-              >
-            </li>
-            <li>
-              <a
-                href="#contact"
-                class="px-4 py-2 text-sm font-semibold text-base bg-primary rounded-md hover:bg-secondary transition-all"
-              >
-                Contacto
-              </a>
-            </li>
-            <li>
-              <ThemeToggle client:only="react" />
-            </li>
-          </ul>
-          <MobileMenu client:only="react" />
-        </div>
-      </nav>
-    </header>
+              <li>
+                <a
+                  class="hover:text-primary transition-colors"
+                  href="#experience">Experiencia</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-primary transition-colors" href="#projects"
+                  >Proyectos</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-primary transition-colors" href="#skills"
+                  >Habilidades</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="px-4 py-2 text-sm font-semibold text-base bg-primary rounded-md hover:bg-secondary transition-all"
+                >
+                  Contacto
+                </a>
+              </li>
+              <li>
+                <ThemeToggle client:only="react" />
+              </li>
+            </ul>
+            <MobileMenu client:only="react" />
+          </div>
+        </nav>
+      </header>
 
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <slot />
-    </main>
+      <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <slot />
+      </main>
 
-    <footer class="mt-12 md:mt-24 pb-8 text-center text-secondary/50 text-sm">
-      <p>Diseñado y construido por Oscar Sinuco.</p>
-    </footer>
+      <footer class="mt-12 md:mt-24 pb-8 text-center text-secondary/50 text-sm">
+        <p>Diseñado y construido por Oscar Sinuco.</p>
+      </footer>
+    </div>
+
+    <style is:global>
+      /* Estado inicial: oculto y sin ocupar espacio de clics */
+      .invisible-content {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+      }
+
+      /* Clase que activa la transición */
+      .content-fade-in {
+        opacity: 1;
+        pointer-events: all;
+        visibility: visible;
+        animation: fadeInContent 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @keyframes fadeInContent {
+        from {
+          opacity: 0;
+          transform: translateY(
+            40px
+          ); /* Un poco más de recorrido para que sea más dramático */
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+
+    <script>
+      // Escuchamos el evento que enviamos desde React
+      window.addEventListener("launch-complete", () => {
+        const content = document.getElementById("main-content");
+        const body = document.body;
+        if (content) {
+          setTimeout(() => {
+            body.classList.remove("overflow-hidden");
+            content.classList.remove("opacity-0", "pointer-events-none");
+            content.classList.add("content-fade-in");
+          }, 100);
+        }
+      });
+    </script>
   </body>
 </html>
