@@ -30,7 +30,7 @@ const MobileMenu: React.FC = () => {
                     />
 
                     {/* Menu Panel */}
-                    <div className="absolute top-16 right-4 left-4 bg-surface/95 backdrop-blur-md rounded-2xl border border-primary/20 shadow-2xl p-6">
+                    <div className="absolute top-16 right-4 left-4 bg-black/90 backdrop-blur-md rounded-2xl border border-primary/20 shadow-2xl p-6">
                         <nav className="space-y-4">
                             <a
                                 href="#experience"
