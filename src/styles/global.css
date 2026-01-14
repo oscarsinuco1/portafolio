@@ -1,35 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --color-primary: #88c0d0;    /* Nord blue */
-  --color-secondary: #81a1c1; /* Nord light blue */
-  --color-accent: #a3be8c;  /* Nord green */
-  --color-bg-dark: #2e3440; /* Nord dark */
-  --color-text-dark: #eceff4; /* Nord light */
-  --color-text-light: #d8dee9; /* Nord lighter */
-}
-.terminal-user { color: #a3be8c; }
-.terminal-at { color: #eceff4; }
-.terminal-host { color: #88c0d0; }
-.terminal-colon { color: #eceff4; }
-.terminal-path { color: #81a1c1; }
-.terminal-prompt { color: #a3be8c; }
-.terminal-command { color: #eceff4; }
-.terminal-output { color: #88c0d0; }
-.terminal-output-secondary { color: #81a1c1; }
-[data-theme="light"] .terminal-user { color: #ff6b6b; } /* Vivid red */
-[data-theme="light"] .terminal-at { color: #4ecdc4; } /* Turquoise */
-[data-theme="light"] .terminal-host { color: #45b7d1; } /* Bright blue */
-[data-theme="light"] .terminal-colon { color: #f9ca24; } /* Yellow */
-[data-theme="light"] .terminal-path { color: #f0932b; } /* Orange */
-[data-theme="light"] .terminal-prompt { color: #eb4d4b; } /* Red */
-[data-theme="light"] .terminal-command { color: #6c5ce7; } /* Purple */
-[data-theme="light"] .terminal-output { color: #a29bfe; } /* Light purple */
-[data-theme="light"] .terminal-output-secondary { color: #fd79a8; } /* Pink */
+/* =========================================
+   1. VARIABLES & THEMES
+   ========================================= */
 
-[data-theme="light"] #starfield {
-  display: none;
+:root {
+  /* --- Dark Mode (Base / Neon Cyberpunk) --- */
+  --color-primary: 0 243 255;      /* Cyan Neon */
+  --color-secondary: 255 0 255;    /* Magenta Neon */
+  --color-accent: 57 255 20;       /* Neon Green */
+
+  --color-bg-base: 5 5 16;         /* Deep Space */
+  --color-bg-surface: 15 15 35;    /* Lighter dark */
+  --color-bg-highlight: 30 30 60;
+
+  --color-text-base: 240 240 255;  /* Cool White */
+  --color-text-muted: 140 140 180;
+  --color-text-inverted: 10 10 20;
+
+  --color-border: 0 243 255;       /* Cyan border */
+  --color-stars: #ffffff;          /* White stars */
+
+  /* --- Timeline Colors --- */
+  --color-timeline-emerald-primary: 52 211 153;
+  --color-timeline-emerald-secondary: 16 185 129;
+  --color-timeline-emerald-bg: 6 78 59;
+  --color-timeline-blue-primary: 96 165 250;
+  --color-timeline-blue-secondary: 59 130 246;
+  --color-timeline-blue-bg: 30 58 138;
+  --color-timeline-purple-primary: 244 114 182;
+  --color-timeline-purple-secondary: 236 72 153;
+  --color-timeline-purple-bg: 131 24 67;
+  --color-timeline-line: 255 255 255;
+
+  /* --- Effect Colors --- */
+  --color-rainbow-1: 0 243 255;
+  --color-rainbow-2: 255 0 255;
+  --color-rainbow-3: 255 238 0;
+  --color-scanline-dark: 18 16 16;
+  --color-scanline-light: 0 0 0;
+  --color-bg-overlay-dark: 15 15 35;
+  --color-bg-overlay-light: 5 5 16;
+
+  /* --- Toggle Colors --- */
+  --color-toggle-dark-bg: 255 255 255;
+  --color-toggle-dark-text: 250 204 21;
+  --color-toggle-dark-border: 250 204 21;
+
+  /* --- Terminal Vars (Mapped to Dark Mode) --- */
+  --term-bg-body: rgb(var(--color-bg-surface));
+  --term-bg-header: rgb(var(--color-bg-base));
+  --term-border: rgb(var(--color-border));
+  --term-text-main: rgb(var(--color-text-base));
+  --term-text-muted: rgb(var(--color-text-muted));
+  --term-link: rgb(var(--color-primary));     /* Cyan */
+  --term-highlight: rgb(var(--color-secondary)); /* Magenta */
+  --term-accent: rgb(var(--color-accent));    /* Verde Neon */
+  --term-scroll-track: rgb(var(--color-bg-base));
+  --term-scroll-thumb: rgb(var(--color-border));
 }
+
+[data-theme="light"] {
+  /* --- Light Mode (Clean / Nord-inspired) --- */
+  --color-primary: 94 129 172;
+  --color-secondary: 136 192 208;
+  --color-accent: 191 97 106;
+
+  --color-bg-base: 236 239 244;
+  --color-bg-surface: 229 233 240;
+  --color-bg-highlight: 216 222 233;
+
+  --color-text-base: 46 52 64;
+  --color-text-muted: 76 86 106;
+  --color-text-inverted: 236 239 244;
+
+  --color-border: 216 222 233;
+  --color-light-heading: 46 52 64;
+  --color-stars: #191970; /* Midnight blue */
+
+  /* --- Toggle Colors (Light) --- */
+  --color-toggle-light-bg: 238 242 255;
+  --color-toggle-light-text: 79 70 229;
+  --color-toggle-light-border: 224 231 255;
+
+  /* --- Terminal Vars (Modo Claro - Scroll Plano) --- */
+  --term-bg-body: #f8fafc;
+  --term-bg-header: #f8fafc;
+  --term-border: #e2e8f0;
+  --term-text-main: #0f172a;
+  --term-text-muted: #64748b;
+  --term-link: #2563eb;
+  --term-highlight: #7c3aed;
+  --term-accent: #dc2626;
+
+  /* Colores para un scrollbar limpio y sin neón */
+  --term-scroll-track: #f1f5f9; /* Slate 100 */
+  --term-scroll-thumb: #cbd5e1; /* Slate 300 */
+}
+
+/* =========================================
+   2. GLOBAL BASE STYLES
+   ========================================= */
 
 @layer base {
   html {
@@ -38,48 +109,228 @@
 
   body {
     @apply leading-relaxed antialiased;
-    background: var(--color-bg-dark);
-    color: var(--color-text-light);
+    background-color: rgb(var(--color-bg-base));
+    color: rgb(var(--color-text-base));
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+    /* Background Pattern (Dark Mode default) */
+    background-image: 
+      linear-gradient(rgba(var(--color-bg-overlay-dark), 0.95), rgba(var(--color-bg-overlay-light), 0.98)),
+      linear-gradient(rgba(var(--color-primary), 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--color-primary), 0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+  }
+
+  [data-theme="light"] body {
+    background-image: none;
   }
 }
 
-/* Custom Scrollbar */
+/* Global Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background-color: var(--color-bg-dark);
+  background-color: rgb(var(--color-bg-base));
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary);
-  border-radius: 10px;
+  background-color: rgb(var(--color-primary));
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgb(var(--color-primary)); /* Neon Glow */
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-secondary);
+  background-color: rgb(var(--color-secondary));
 }
 
-/* Gradient Background Animation */
+#starfield div {
+  background-color: var(--color-stars) !important;
+}
+
+/* =========================================
+   3. COMPONENTS & UTILITIES
+   ========================================= */
+
+@layer components {
+  /* Neon Box (Glassmorphism + Neon Borders) */
+  .neon-box {
+    background: rgba(var(--color-bg-surface), 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--color-primary), 0.5);
+    box-shadow: 0 0 10px rgba(var(--color-primary), 0.2), inset 0 0 20px rgba(var(--color-primary), 0.1);
+    position: relative;
+  }
+  .neon-box::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 20px; height: 20px;
+    border-bottom: 2px solid rgb(var(--color-secondary));
+    border-right: 2px solid rgb(var(--color-secondary));
+    box-shadow: 2px 2px 10px rgba(var(--color-secondary), 0.8);
+    pointer-events: none;
+  }
+  .neon-box::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 20px; height: 20px;
+    border-top: 2px solid rgb(var(--color-secondary));
+    border-left: 2px solid rgb(var(--color-secondary));
+    box-shadow: -2px -2px 10px rgba(var(--color-secondary), 0.8);
+    pointer-events: none;
+  }
+  .neon-box:hover {
+    border-color: rgba(var(--color-primary), 1);
+    box-shadow: 0 0 15px rgba(var(--color-primary), 0.5), 0 0 30px rgba(var(--color-primary), 0.3), inset 0 0 30px rgba(var(--color-primary), 0.2);
+  }
+}
+
+/* Neon Text Utilities */
+.neon-text {
+  text-shadow: 0 0 5px rgba(var(--color-primary), 0.8), 0 0 10px rgba(var(--color-primary), 0.5), 0 0 20px rgba(var(--color-primary), 0.3);
+}
+.neon-text-secondary {
+  text-shadow: 0 0 5px rgba(var(--color-secondary), 0.8), 0 0 10px rgba(var(--color-secondary), 0.5);
+}
+
+/* Section Titles */
+.section-title {
+  @apply text-4xl md:text-5xl font-black text-center mb-16 uppercase tracking-widest relative inline-block;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(var(--color-primary), 0.8);
+  text-shadow: 0 0 20px rgba(var(--color-primary), 0.5);
+  background: none;
+}
+[data-theme="dark"] .section-title::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px; top: 2px;
+  color: rgb(var(--color-primary));
+  opacity: 0.5;
+  filter: blur(2px);
+  z-index: -1;
+}
+[data-theme="light"] .section-title {
+  background-color: transparent;
+  color: rgb(var(--color-light-heading));
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+/* Rainbow Text */
+.rainbow-text {
+  background: linear-gradient(90deg, rgb(var(--color-rainbow-1)), rgb(var(--color-rainbow-2)), rgb(var(--color-rainbow-3)), rgb(var(--color-rainbow-1)));
+  background-size: 300% 100%;
+  animation: rainbow 5s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Scanlines Effect */
+.bg-scanlines::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(to bottom, rgba(var(--color-scanline-dark), 0) 50%, rgba(var(--color-scanline-light), 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* =========================================
+   4. TERMINAL SPECIFIC STYLES
+   ========================================= */
+
+/* Class mappings for Typewriter HTML strings */
+.term-link { color: var(--term-link); font-weight: bold; }
+.term-highlight { color: var(--term-highlight); font-weight: bold; }
+.term-accent { color: var(--term-accent); font-weight: bold; }
+.term-text { color: var(--term-text-main); }
+.term-muted { color: var(--term-text-muted); }
+.term-path { color: var(--term-link); font-weight: bold; }
+
+/* Prompt Symbol */
+.term-symbol {
+  color: var(--term-accent);
+  font-weight: bold;
+  margin-left: 4px;
+  margin-right: 8px;
+}
+
+/* Typewriter Cursor */
+.Typewriter__cursor {
+  color: var(--term-accent);
+  font-weight: bold;
+}
+
+/* Terminal Internal Scrollbar (Custom scoped) */
+.zsh-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.zsh-scrollbar::-webkit-scrollbar-track {
+  background: var(--term-scroll-track);
+}
+.zsh-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--term-scroll-thumb);
+  border-radius: 4px;
+}
+[data-theme="light"] .zsh-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+[data-theme="dark"] .zsh-scrollbar::-webkit-scrollbar-thumb {
+  opacity: 0.5;
+}
+
+/* =========================================
+   5. ANIMATIONS & UTILITIES
+   ========================================= */
+
+@layer utilities {
+  .shadow-primary-sm { box-shadow: 0 0 10px rgba(var(--color-primary), 0.2); }
+  .shadow-primary-md { box-shadow: 0 0 15px rgba(var(--color-primary), 0.3); }
+  .shadow-primary-lg { box-shadow: 0 0 20px rgba(var(--color-primary), 0.4); }
+  
+  .shadow-secondary-sm { box-shadow: 0 0 10px rgba(var(--color-secondary), 0.2); }
+  .shadow-secondary-md { box-shadow: 0 0 15px rgba(var(--color-secondary), 0.3); }
+  .shadow-secondary-lg { box-shadow: 0 0 20px rgba(var(--color-secondary), 0.4); }
+
+  .animate-slide-up {
+    animation: slide-up-quick 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+/* Keyframes Definitions */
+
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes slide-up-quick {
+  0% { opacity: 0; transform: translateY(100px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* Shape Background Animation */
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
   100% { transform: translateY(0px); }
 }
 
-/* Starfield Animation */
 @keyframes star {
   0% { transform: translateY(100vh) scale(0); opacity: 0; }
   10% { opacity: 1; }
@@ -87,69 +338,17 @@
   100% { transform: translateY(-100px) scale(1); opacity: 0; }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation Utilities */
 .animate-star {
   animation: star linear infinite;
 }
 
-/* Rainbow Text */
-.rainbow-text {
-  background: linear-gradient(45deg, #88c0d0, #81a1c1, #a3be8c, #ebcb8b, #bf616a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
 }
 
-.shape {
-    position: absolute;
-    border-radius: 2rem;
-    opacity: 0.15;
-    animation: float 20s ease-in-out infinite;
-}
-
-.shape-1 {
-    width: 200px;
-    height: 200px;
-    top: 10%;
-    left: 10%;
-    background-color: var(--color-primary);
-}
-
-.shape-2 {
-    width: 150px;
-    height: 150px;
-    top: 25%;
-    right: 15%;
-    background-color: var(--color-secondary);
-    animation-duration: 25s;
-}
-
-.shape-3 {
-    width: 100px;
-    height: 100px;
-    bottom: 20%;
-    left: 25%;
-    background-color: var(--color-accent);
-    animation-duration: 18s;
-}
-
-.shape-4 {
-    width: 120px;
-    height: 120px;
-    bottom: 5%;
-    right: 5%;
-    background-color: var(--color-primary);
-}
-
-
-@layer components {
-  .colorful-card {
-    @apply bg-black rounded-lg shadow-xl overflow-hidden transition-all duration-300 ease-in-out;
-    border-top: 4px solid var(--color-primary);
-  }
-
-  .colorful-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    border-top-color: var(--color-accent);
-  }
-}

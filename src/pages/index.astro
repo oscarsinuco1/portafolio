@@ -1,172 +1,137 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import ExperienceCard from "../components/ExperienceCard.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import SkillPill from "../components/SkillPill.astro";
+import ProjectShowcase from "../components/ProjectShowcase.tsx";
+import SkillsList from "../components/SkillsList.tsx";
 import TerminalHero from "../components/TerminalHero.tsx";
 import Starfield from "../components/Starfield.tsx";
+import ExperienceTimeline from "../components/ExperienceTimeline.tsx";
+import { FaHandSparkles, FaArrowRight, FaEnvelope, FaWhatsapp, FaPhone } from "react-icons/fa";
 ---
 
 <MainLayout>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Hero Section -->
-    <section
-      id="hero"
-      class="min-h-screen flex flex-col justify-center items-center text-center relative"
-    >
-      <Starfield client:load />
-      <TerminalHero client:load />
-      <div class="mt-10 flex items-center gap-x-6">
-        <a
-          href="#contact"
-          class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          >Contáctame</a
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Hero Section -->
+        <section
+            id="hero"
+            class="min-h-[calc(100vh-8rem)] md:min-h-[calc(100vh-10rem)] flex flex-col justify-center items-center text-center relative"
         >
-        <a href="#projects" class="text-sm font-semibold leading-6 text-primary"
-          >Ver mis proyectos <span aria-hidden="true">→</span></a
-        >
-      </div>
-    </section>
+            <Starfield client:load />
+            <TerminalHero client:load />
+            <div class="mt-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-x-6">
+                <a
+                    href="#contact"
+                    class="rounded-full bg-primary/10 px-6 py-3 text-base font-bold text-primary border border-primary/50 shadow-[0_0_20px_rgba(var(--color-primary),0.3)] hover:bg-primary hover:text-inverted hover:shadow-[0_0_40px_rgba(var(--color-primary),0.6)] hover:scale-105 transition-all duration-300"
+                    >Contáctame</a
+                >
+                <a
+                    href="#projects"
+                    class="rounded-full bg-transparent px-6 py-3 text-base font-bold text-primary border border-primary/30 shadow-[0_0_10px_rgba(var(--color-primary),0.1)] hover:bg-primary/10 hover:border-primary/80 hover:shadow-[0_0_20px_rgba(var(--color-primary),0.4)] hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                    >Ver mis proyectos <FaArrowRight
+                        client:load
+                        className="group-hover:translate-x-1 transition-transform"
+                    /></a
+                >
+            </div>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 md:py-20">
-        <h2 class="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Sobre Mí</h2>
-        <p class="mt-6 text-lg leading-8 text-secondary">
-            Soy un apasionado por la tecnología y el desarrollo de software, con un fuerte enfoque en la arquitectura frontend, la automatización de procesos DevOps y la seguridad web. Disfruto liderando equipos técnicos, mentorizando a desarrolladores y participando activamente en revisiones de código para mantener altos estándares de calidad. Mi motivación es identificar trabajo de alto impacto, priorizando siempre el valor para el cliente, y me mantengo en continuo aprendizaje, explorando nuevas tecnologías como microfrontends y el ecosistema de IA Generativa de forma independiente.
-        </p>
-    </section>
+        <!-- About Section -->
+        <section id="about" class="py-16 md:py-24 relative">
+            <!-- Decorative background blur -->
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/5 blur-[100px] -z-10 rounded-full pointer-events-none"
+            >
+            </div>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-16 md:py-20">
-        <h2 class="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Experiencia Profesional</h2>
-        <div class="mt-12 grid gap-8">
-            <ExperienceCard
-                date="Abr 2021 - Dic 2025"
-                title="Frontend Development Lead"
-                company="Universidad Industrial de Santander (DTIC)"
-                location="Híbrido"
-                description={[
-                    "Liderazgo en la arquitectura de aplicaciones Angular escalables y modulares.",
-                    "Mantenimiento y extensión de librerías de componentes UI personalizados.",
-                    "Impulso de la migración hacia una arquitectura de microfrontends con single-spa.",
-                    "Diseño y mantenimiento de pipelines CI/CD con GitLab CI para testing, linting, y despliegues multi-entorno."
-                ]}
-            />
-            <ExperienceCard
-                date="May 2023 - Actualidad"
-                title="Fullstack Developer"
-                company="Global MVM"
-                location="Remoto"
-                description={[
-                    "Desarrollo y mantenimiento de aplicaciones en Angular (v8-v19) bajo una arquitectura de microfrontends en Azure.",
-                    "Migración de múltiples aplicaciones web de Azure App Services a Blob Storage, optimizando costos.",
-                    "Soporte a equipos de backend con integraciones .NET y configuración de pipelines CI/CD en Azure DevOps.",
-                    "Colaboración en equipos Agile/Scrum, proveyendo soporte técnico en retos de frontend y pipelines."
-                ]}
-            />
-            <ExperienceCard
-                date="Ago 2020 - Feb 2021"
-                title="Fullstack Developer"
-                company="C.R.A.S Development S.A.S"
-                location="Remoto"
-                description={[
-                    "Liderazgo en el desarrollo end-to-end (frontend, backend, DB) de las aplicaciones web SmartSnacks y RubiWealth.",
-                    "Implementación de interfaces con Angular y desarrollo de APIs con Node.js.",
-                    "Gestión de hosting, despliegue y configuración de dominios."
-                ]}
-            />
-        </div>
-    </section>
+            <div
+                class="neon-box p-8 md:p-12 rounded-3xl max-w-4xl mx-auto text-center transform hover:scale-[1.01] transition-transform duration-500"
+            >
+                <h2 class="section-title">Sobre Mí</h2>
+                <p
+                    class="text-lg md:text-xl leading-relaxed text-muted dark:text-secondary/90 max-w-3xl mx-auto"
+                >
+                    Soy un apasionado por la tecnología y el desarrollo de
+                    software, con un fuerte enfoque en la arquitectura frontend,
+                    la automatización de procesos DevOps y la seguridad web.
+                    Disfruto liderando equipos técnicos, mentorizando a
+                    desarrolladores y participando activamente en revisiones de
+                    código para mantener altos estándares de calidad. <br /><br
+                    />
+                    <span class="text-primary font-medium"
+                        >Mi motivación es identificar trabajo de alto impacto</span
+                    >, priorizando siempre el valor para el cliente, y me
+                    mantengo en continuo aprendizaje, explorando nuevas
+                    tecnologías como <span
+                        class="text-accent underline decoration-accent/30 underline-offset-4"
+                        >microfrontends</span
+                    > y el ecosistema de
+                    <span
+                        class="text-accent underline decoration-accent/30 underline-offset-4"
+                        >IA Generativa</span
+                    >.
+                </p>
+            </div>
+        </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-16 md:py-20">
-      <h2 class="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Proyectos</h2>
+        <!-- Experience Section -->
+        <section id="experience" class="py-12 md:py-16">
+            <h2 class="section-title">Experiencia Profesional</h2>
+            <ExperienceTimeline client:only="react" />
+        </section>
 
-      <div class="mt-12">
-        <h3 class="text-2xl font-bold text-accent">Innovaciones con IA Generativa</h3>
-        <div class="mt-8 grid md:grid-cols-2 gap-8">
-            <ProjectCard
-                title="AI Semantic Code Reviewer"
-                description="Agente inteligente que audita Pull Requests buscando integridad arquitectónica y buenas prácticas. Detecta anti-patrones complejos y riesgos de mantenimiento que herramientas estáticas omiten."
-                tags={["Python", "LLM APIs (Gemini/OpenAI)", "Git Webhooks", "CI/CD"]}
-                github="https://github.com/"
-            />
-            <ProjectCard
-                title="Auto-Remediation & Coverage Agent"
-                description="Bot proactivo que arregla deuda técnica y mejora la cobertura de tests de forma autónoma. Genera unit tests faltantes y refactoriza el código para cumplir con los quality gates."
-                tags={["GenKit", "TypeScript", "AST Parsing", "Azure DevOps"]}
-                github="https://github.com/"
-            />
-        </div>
-      </div>
+        <!-- Projects Section -->
+        <section id="projects" class="py-12 md:py-16">
+            <h2 class="section-title">Proyectos</h2>
 
-      <div class="mt-12">
-        <h3 class="text-2xl font-bold text-secondary">Proyectos Personales</h3>
-        <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ProjectCard
-                title="Pingo App"
-                description="App de intercomunicador móvil multiplataforma que usa WebRTC sobre Wi-Fi y Bluetooth para comunicación P2P de audio sin necesidad de datos móviles."
-                tags={["Flutter", "WebRTC", "Sockets"]}
-                github="https://github.com/"
-            />
-            <ProjectCard
-                title="Theft Predictor"
-                description="Plataforma web de analítica predictiva que estimaba el riesgo de robo en Bucaramanga usando datos geoespaciales históricos. Procesó más de 12,000 incidentes."
-                tags={["Python", "Django", "TensorFlow", "VanillaJS"]}
-                github="https://github.com/"
-            />
-            <ProjectCard
-                title="PDF Reporter"
-                description="Microservicio en NodeJS para generar PDFs desde plantillas HTML precompiladas. Renderiza reportes dinámicos usando Puppeteer y Handlebars."
-                tags={["Node.js", "Puppeteer", "Handlebars"]}
-                github="https://github.com/"
-            />
-        </div>
-      </div>
-    </section>
+            <div class="mt-12">
+                <ProjectShowcase client:visible />
+            </div>
+        </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-16 md:py-20">
-        <h2 class="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Habilidades Técnicas</h2>
-        <ul class="mt-8 flex flex-wrap gap-2">
-            <SkillPill name="Java"/>
-            <SkillPill name="JavaScript"/>
-            <SkillPill name="TypeScript"/>
-            <SkillPill name="HTML"/>
-            <SkillPill name="CSS"/>
-            <SkillPill name="Angular (Expert)"/>
-            <SkillPill name="React"/>
-            <SkillPill name="Redux"/>
-            <SkillPill name="NestJS"/>
-            <SkillPill name="Express"/>
-            <SkillPill name="Node.js"/>
-            <SkillPill name="GenKit"/>
-            <SkillPill name="Gemini API"/>
-            <SkillPill name="Azure OpenAI"/>
-            <SkillPill name="Flutter"/>
-            <SkillPill name="Ionic"/>
-            <SkillPill name="Azure"/>
-            <SkillPill name="GitLab CI/CD"/>
-            <SkillPill name="PostgreSQL"/>
-            <SkillPill name="SQL Server"/>
-            <SkillPill name="MongoDB"/>
-            <SkillPill name="Firebase"/>
-            <SkillPill name="Linux"/>
-        </ul>
-    </section>
+        <!-- Skills Section -->
+        <section id="skills" class="py-12 md:py-16">
+            <h2 class="section-title">Habilidades Técnicas</h2>
+            <div class="mt-8">
+                <SkillsList client:visible />
+            </div>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 sm:py-32 text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Ponte en Contacto</h2>
-        <p class="mt-4 text-lg leading-8 text-secondary">
-            Estoy abierto a nuevas oportunidades y colaboraciones. Si tienes un proyecto en mente o simplemente quieres saludar, no dudes en escribirme.
-        </p>
-        <div class="mt-10">
-            <a href="mailto:oscarsinuco@gmail.com" class="rounded-md bg-accent px-6 py-3 text-base font-semibold text-black shadow-lg hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent transition-transform hover:scale-105">
-                Di Hola 👋
-            </a>
-        </div>
-    </section>
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 sm:py-24">
+            <div
+                class="neon-box p-8 md:p-16 rounded-3xl max-w-4xl mx-auto text-center"
+            >
+                <h2 class="section-title mb-6">Ponte en Contacto</h2>
+                <p
+                    class="text-lg md:text-xl leading-relaxed text-muted dark:text-secondary/90 max-w-2xl mx-auto mb-10"
+                >
+                    Estoy abierto a nuevas oportunidades y colaboraciones. Si
+                    tienes un proyecto en mente o simplemente quieres saludar,
+                    no dudes en escribirme.
+                </p>
 
-  </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a
+                        href="mailto:oscarsinuco@gmail.com"
+                        class="inline-flex items-center justify-center gap-2 rounded-full bg-primary/10 px-6 py-3 text-base font-bold text-primary border border-primary/50 shadow-[0_0_20px_rgba(var(--color-primary),0.3)] hover:bg-primary hover:text-inverted hover:shadow-[0_0_40px_rgba(var(--color-primary),0.6)] hover:scale-105 transition-all duration-300"
+                    >
+                        <FaEnvelope client:load /> Gmail
+                    </a>
+                    <a
+                        href="https://wa.me/573154573647"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center gap-2 rounded-full bg-primary/10 px-6 py-3 text-base font-bold text-primary border border-primary/50 shadow-[0_0_20px_rgba(var(--color-primary),0.3)] hover:bg-primary hover:text-inverted hover:shadow-[0_0_40px_rgba(var(--color-primary),0.6)] hover:scale-105 transition-all duration-300"
+                    >
+                        <FaWhatsapp client:load /> WhatsApp
+                    </a>
+                    <a
+                        href="tel:+573154573647"
+                        class="inline-flex items-center justify-center gap-2 rounded-full bg-primary/10 px-6 py-3 text-base font-bold text-primary border border-primary/50 shadow-[0_0_20px_rgba(var(--color-primary),0.3)] hover:bg-primary hover:text-inverted hover:shadow-[0_0_40px_rgba(var(--color-primary),0.6)] hover:scale-105 transition-all duration-300"
+                    >
+                        <FaPhone client:load /> Llamar
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
 </MainLayout>
