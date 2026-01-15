@@ -6,20 +6,20 @@
 
 :root {
   /* --- Dark Mode (Base / Neon Cyberpunk) --- */
-  --color-primary: 0 243 255;      /* Cyan Neon */
-  --color-secondary: 255 0 255;    /* Magenta Neon */
-  --color-accent: 57 255 20;       /* Neon Green */
+  --color-primary: 0 243 255; /* Cyan Neon */
+  --color-secondary: 255 0 255; /* Magenta Neon */
+  --color-accent: 57 255 20; /* Neon Green */
 
-  --color-bg-base: 5 5 16;         /* Deep Space */
-  --color-bg-surface: 15 15 35;    /* Lighter dark */
+  --color-bg-base: 5 5 16; /* Deep Space */
+  --color-bg-surface: 15 15 35; /* Lighter dark */
   --color-bg-highlight: 30 30 60;
 
-  --color-text-base: 240 240 255;  /* Cool White */
+  --color-text-base: 240 240 255; /* Cool White */
   --color-text-muted: 140 140 180;
   --color-text-inverted: 10 10 20;
 
-  --color-border: 0 243 255;       /* Cyan border */
-  --color-stars: #ffffff;          /* White stars */
+  --color-border: 0 243 255; /* Cyan border */
+  --color-stars: #ffffff; /* White stars */
 
   /* --- Timeline Colors --- */
   --color-timeline-emerald-primary: 52 211 153;
@@ -53,9 +53,9 @@
   --term-border: rgb(var(--color-border));
   --term-text-main: rgb(var(--color-text-base));
   --term-text-muted: rgb(var(--color-text-muted));
-  --term-link: rgb(var(--color-primary));     /* Cyan */
+  --term-link: rgb(var(--color-primary)); /* Cyan */
   --term-highlight: rgb(var(--color-secondary)); /* Magenta */
-  --term-accent: rgb(var(--color-accent));    /* Verde Neon */
+  --term-accent: rgb(var(--color-accent)); /* Verde Neon */
   --term-scroll-track: rgb(var(--color-bg-base));
   --term-scroll-thumb: rgb(var(--color-border));
 }
@@ -113,12 +113,18 @@
     color: rgb(var(--color-text-base));
     min-height: 100vh;
     transition: background-color 0.3s ease, color 0.3s ease;
-    
+
     /* Background Pattern (Dark Mode default) */
-    background-image: 
-      linear-gradient(rgba(var(--color-bg-overlay-dark), 0.95), rgba(var(--color-bg-overlay-light), 0.98)),
+    background-image: linear-gradient(
+        rgba(var(--color-bg-overlay-dark), 0.95),
+        rgba(var(--color-bg-overlay-light), 0.98)
+      ),
       linear-gradient(rgba(var(--color-primary), 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(var(--color-primary), 0.03) 1px, transparent 1px);
+      linear-gradient(
+        90deg,
+        rgba(var(--color-primary), 0.03) 1px,
+        transparent 1px
+      );
     background-size: 100% 100%, 40px 40px, 40px 40px;
   }
 
@@ -157,14 +163,17 @@
     background: rgba(var(--color-bg-surface), 0.6);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(var(--color-primary), 0.5);
-    box-shadow: 0 0 10px rgba(var(--color-primary), 0.2), inset 0 0 20px rgba(var(--color-primary), 0.1);
+    box-shadow: 0 0 10px rgba(var(--color-primary), 0.2),
+      inset 0 0 20px rgba(var(--color-primary), 0.1);
     position: relative;
   }
   .neon-box::after {
     content: "";
     position: absolute;
-    bottom: -1px; right: -1px;
-    width: 20px; height: 20px;
+    bottom: -1px;
+    right: -1px;
+    width: 20px;
+    height: 20px;
     border-bottom: 2px solid rgb(var(--color-secondary));
     border-right: 2px solid rgb(var(--color-secondary));
     box-shadow: 2px 2px 10px rgba(var(--color-secondary), 0.8);
@@ -173,8 +182,10 @@
   .neon-box::before {
     content: "";
     position: absolute;
-    top: -1px; left: -1px;
-    width: 20px; height: 20px;
+    top: -1px;
+    left: -1px;
+    width: 20px;
+    height: 20px;
     border-top: 2px solid rgb(var(--color-secondary));
     border-left: 2px solid rgb(var(--color-secondary));
     box-shadow: -2px -2px 10px rgba(var(--color-secondary), 0.8);
@@ -182,16 +193,21 @@
   }
   .neon-box:hover {
     border-color: rgba(var(--color-primary), 1);
-    box-shadow: 0 0 15px rgba(var(--color-primary), 0.5), 0 0 30px rgba(var(--color-primary), 0.3), inset 0 0 30px rgba(var(--color-primary), 0.2);
+    box-shadow: 0 0 15px rgba(var(--color-primary), 0.5),
+      0 0 30px rgba(var(--color-primary), 0.3),
+      inset 0 0 30px rgba(var(--color-primary), 0.2);
   }
 }
 
 /* Neon Text Utilities */
 .neon-text {
-  text-shadow: 0 0 5px rgba(var(--color-primary), 0.8), 0 0 10px rgba(var(--color-primary), 0.5), 0 0 20px rgba(var(--color-primary), 0.3);
+  text-shadow: 0 0 5px rgba(var(--color-primary), 0.8),
+    0 0 10px rgba(var(--color-primary), 0.5),
+    0 0 20px rgba(var(--color-primary), 0.3);
 }
 .neon-text-secondary {
-  text-shadow: 0 0 5px rgba(var(--color-secondary), 0.8), 0 0 10px rgba(var(--color-secondary), 0.5);
+  text-shadow: 0 0 5px rgba(var(--color-secondary), 0.8),
+    0 0 10px rgba(var(--color-secondary), 0.5);
 }
 
 /* Section Titles */
@@ -204,7 +220,8 @@
 [data-theme="dark"] .section-title::before {
   content: attr(data-text);
   position: absolute;
-  left: 2px; top: 2px;
+  left: 2px;
+  top: 2px;
   color: rgb(var(--color-primary));
   opacity: 0.5;
   filter: blur(2px);
@@ -219,7 +236,13 @@
 
 /* Rainbow Text */
 .rainbow-text {
-  background: linear-gradient(90deg, rgb(var(--color-rainbow-1)), rgb(var(--color-rainbow-2)), rgb(var(--color-rainbow-3)), rgb(var(--color-rainbow-1)));
+  background: linear-gradient(
+    90deg,
+    rgb(var(--color-rainbow-1)),
+    rgb(var(--color-rainbow-2)),
+    rgb(var(--color-rainbow-3)),
+    rgb(var(--color-rainbow-1))
+  );
   background-size: 300% 100%;
   animation: rainbow 5s ease-in-out infinite;
   -webkit-background-clip: text;
@@ -232,8 +255,15 @@
   content: " ";
   display: block;
   position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(to bottom, rgba(var(--color-scanline-dark), 0) 50%, rgba(var(--color-scanline-light), 0.25) 50%);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--color-scanline-dark), 0) 50%,
+    rgba(var(--color-scanline-light), 0.25) 50%
+  );
   background-size: 100% 4px;
   z-index: 2;
   pointer-events: none;
@@ -244,12 +274,28 @@
    ========================================= */
 
 /* Class mappings for Typewriter HTML strings */
-.term-link { color: var(--term-link); font-weight: bold; }
-.term-highlight { color: var(--term-highlight); font-weight: bold; }
-.term-accent { color: var(--term-accent); font-weight: bold; }
-.term-text { color: var(--term-text-main); }
-.term-muted { color: var(--term-text-muted); }
-.term-path { color: var(--term-link); font-weight: bold; }
+.term-link {
+  color: var(--term-link);
+  font-weight: bold;
+}
+.term-highlight {
+  color: var(--term-highlight);
+  font-weight: bold;
+}
+.term-accent {
+  color: var(--term-accent);
+  font-weight: bold;
+}
+.term-text {
+  color: var(--term-text-main);
+}
+.term-muted {
+  color: var(--term-text-muted);
+}
+.term-path {
+  color: var(--term-link);
+  font-weight: bold;
+}
 
 /* Prompt Symbol */
 .term-symbol {
@@ -288,13 +334,25 @@
    ========================================= */
 
 @layer utilities {
-  .shadow-primary-sm { box-shadow: 0 0 10px rgba(var(--color-primary), 0.2); }
-  .shadow-primary-md { box-shadow: 0 0 15px rgba(var(--color-primary), 0.3); }
-  .shadow-primary-lg { box-shadow: 0 0 20px rgba(var(--color-primary), 0.4); }
-  
-  .shadow-secondary-sm { box-shadow: 0 0 10px rgba(var(--color-secondary), 0.2); }
-  .shadow-secondary-md { box-shadow: 0 0 15px rgba(var(--color-secondary), 0.3); }
-  .shadow-secondary-lg { box-shadow: 0 0 20px rgba(var(--color-secondary), 0.4); }
+  .shadow-primary-sm {
+    box-shadow: 0 0 10px rgba(var(--color-primary), 0.2);
+  }
+  .shadow-primary-md {
+    box-shadow: 0 0 15px rgba(var(--color-primary), 0.3);
+  }
+  .shadow-primary-lg {
+    box-shadow: 0 0 20px rgba(var(--color-primary), 0.4);
+  }
+
+  .shadow-secondary-sm {
+    box-shadow: 0 0 10px rgba(var(--color-secondary), 0.2);
+  }
+  .shadow-secondary-md {
+    box-shadow: 0 0 15px rgba(var(--color-secondary), 0.3);
+  }
+  .shadow-secondary-lg {
+    box-shadow: 0 0 20px rgba(var(--color-secondary), 0.4);
+  }
 
   .animate-slide-up {
     animation: slide-up-quick 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -308,47 +366,95 @@
 /* Keyframes Definitions */
 
 @keyframes rainbow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }
 
 @keyframes slide-up-quick {
-  0% { opacity: 0; transform: translateY(100px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slide-down {
-  0% { opacity: 0; transform: translateY(-20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 @keyframes star {
-  0% { transform: translateY(100vh) scale(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-100px) scale(1); opacity: 0; }
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-2px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Animation Utilities */
@@ -360,3 +466,70 @@
   animation: fadeIn 0.2s ease-out forwards;
 }
 
+/* --- Estilos de carga (Launch) --- */
+.invisible-content {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+.content-fade-in {
+  opacity: 1;
+  pointer-events: all;
+  visibility: visible;
+  animation: fadeInContent 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Navbar Styles & Variables --- */
+
+/* 1. Transiciones suaves para las propiedades que vamos a cambiar */
+#navbar {
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    backdrop-filter 0.3s ease;
+  border-bottom: 1px solid transparent; /* Invisible por defecto */
+}
+
+/* 2. Efecto de Blur (Común para ambos temas) */
+#navbar.scrolled {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* --- TEMA CLARO (Usando tus variables Nord) --- */
+/* Cuando data-theme="light", el CSS tomará las variables redefinidas en tu selector [data-theme="light"] */
+[data-theme="light"] #navbar.scrolled {
+  /* --color-bg-base es: 236 239 244. Le damos 85% de opacidad */
+  background-color: #eceff4;
+
+  /* --color-border es: 216 222 233. Borde sutil */
+  border-bottom-color: rgb(var(--color-border) / 0.8);
+}
+
+/* --- TEMA OSCURO (Usando tus variables Neon Cyberpunk) --- */
+/* Esto aplica cuando data-theme="dark" O por defecto (ya que tus vars dark están en :root) */
+:root #navbar.scrolled,
+[data-theme="dark"] #navbar.scrolled {
+  /* --color-bg-base es: 5 5 16 (Deep Space). Le damos 75% opacidad para ver las estrellas de fondo */
+  background-color: rgb(var(--color-bg-base) / 0.75);
+
+  /* --color-border es: 0 243 255 (Cyan Neon). Lo bajamos al 30% para que sea un brillo sutil y no moleste */
+  border-bottom-color: rgb(var(--color-border) / 0.3);
+
+  /* Opcional: Una sombra sutil cyan en modo dark para efecto "glow" */
+  box-shadow: 0 4px 20px -10px rgb(var(--color-primary) / 0.2);
+}
+
+body:has(.welcome-overlay),
+html:has(.welcome-overlay) {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}

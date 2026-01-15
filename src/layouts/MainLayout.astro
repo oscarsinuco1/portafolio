@@ -53,7 +53,8 @@ const {
     <WelcomeMessage client:load />
     <div class="opacity-0 pointer-events-none" id="main-content">
       <header
-        class="sticky top-0 z-40 w-full flex-none bg-base/80 backdrop-blur-md transition-colors duration-300 border-b border-white/5 dark:border-transparent supports-[backdrop-filter]:bg-base/60"
+        id="navbar"
+        class="sticky top-0 z-40 w-full flex-none border-b border-transparent"
       >
         <nav class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex items-center justify-between h-16">
@@ -71,20 +72,13 @@ const {
               class="hidden md:flex items-center space-x-8 text-sm font-medium text-base"
             >
               <li>
-                <a
-                  class="hover:text-primary transition-colors"
-                  href="#experience">Experiencia</a
-                >
+                <a class="hover:text-primary transition-colors" href="#experience">Experiencia</a>
               </li>
               <li>
-                <a class="hover:text-primary transition-colors" href="#projects"
-                  >Proyectos</a
-                >
+                <a class="hover:text-primary transition-colors" href="#projects">Proyectos</a>
               </li>
               <li>
-                <a class="hover:text-primary transition-colors" href="#skills"
-                  >Habilidades</a
-                >
+                <a class="hover:text-primary transition-colors" href="#skills">Habilidades</a>
               </li>
               <li>
                 <a
@@ -112,38 +106,8 @@ const {
       </footer>
     </div>
 
-    <style is:global>
-      /* Estado inicial: oculto y sin ocupar espacio de clics */
-      .invisible-content {
-        opacity: 0;
-        pointer-events: none;
-        visibility: hidden;
-      }
-
-      /* Clase que activa la transición */
-      .content-fade-in {
-        opacity: 1;
-        pointer-events: all;
-        visibility: visible;
-        animation: fadeInContent 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
-
-      @keyframes fadeInContent {
-        from {
-          opacity: 0;
-          transform: translateY(
-            40px
-          ); /* Un poco más de recorrido para que sea más dramático */
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
-
     <script>
-      // Escuchamos el evento que enviamos desde React
+      // 1. Launch Animation
       window.addEventListener("launch-complete", () => {
         const content = document.getElementById("main-content");
         const body = document.body;
@@ -153,6 +117,18 @@ const {
             content.classList.remove("opacity-0", "pointer-events-none");
             content.classList.add("content-fade-in");
           }, 100);
+        }
+      });
+
+      // 2. Scroll Logic (Simplificada)
+      const header = document.getElementById('navbar');
+      
+      window.addEventListener('scroll', () => {
+        if (!header) return;
+        if (window.scrollY > 10) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
         }
       });
     </script>

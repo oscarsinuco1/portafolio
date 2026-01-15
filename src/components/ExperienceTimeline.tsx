@@ -1,19 +1,33 @@
-
-import React from 'react';
+import React, { useState } from 'react'; // 1. Importamos useState
 import VerticalTimelineComponent from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { experienceData } from '../data/experience';
 import { FaBriefcase } from 'react-icons/fa';
 import { timelineThemes, uiColors } from '../styles/colorTokens';
 
+// @ts-ignore
 const { VerticalTimeline, VerticalTimelineElement } = VerticalTimelineComponent || {};
 
 const ExperienceTimeline: React.FC = () => {
+    // 2. Estado para rastrear qué tarjeta fue clickeada
+    const [activeCard, setActiveCard] = useState<number | null>(null);
+
+    // 3. Función para manejar el clic (toggle)
+    const handleCardClick = (index: number) => {
+        if (activeCard === index) {
+            setActiveCard(null); // Si ya estaba abierta, la cerramos
+        } else {
+            setActiveCard(index); // Abrimos la nueva
+        }
+    };
+
      return (
          <div className="mt-12 px-2 sm:px-4 md:px-0">
             <VerticalTimeline lineColor={uiColors.timeline.line}>
                 {experienceData.map((item, index) => {
                     const theme = Object.values(timelineThemes)[index % Object.values(timelineThemes).length];
+                    const isActive = activeCard === index; // Verificamos si esta tarjeta está activa
+
                     return (
                         <VerticalTimelineElement
                             key={index}
@@ -24,7 +38,7 @@ const ExperienceTimeline: React.FC = () => {
                                 backdropFilter: 'blur(12px)',
                                 border: `1px solid ${theme.primary}`,
                                 borderLeft: `4px solid ${theme.primary}`,
-                                boxShadow: `0 0 20px -5px ${theme.shadow}, inset 0 0 10px -5px ${theme.shadow}`, // Neon glow
+                                boxShadow: `0 0 20px -5px ${theme.shadow}, inset 0 0 10px -5px ${theme.shadow}`,
                                 borderRadius: '12px',
                                 color: 'rgb(var(--color-text-base))',
                             }}
@@ -34,7 +48,7 @@ const ExperienceTimeline: React.FC = () => {
                             iconStyle={{
                                 background: theme.iconBg,
                                 color: theme.primary,
-                                boxShadow: `0 0 10px 2px ${theme.primary}60, inset 0 0 0 1px ${theme.primary}`, // Stronger icon glow
+                                boxShadow: `0 0 10px 2px ${theme.primary}60, inset 0 0 0 1px ${theme.primary}`,
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
@@ -43,10 +57,16 @@ const ExperienceTimeline: React.FC = () => {
                             }}
                             icon={<FaBriefcase className="text-sm md:text-base" />}
                         >
-                            <div className="group cursor-pointer p-4 relative overflow-hidden transition-all duration-300">
-                                {/* Decorative gradient background effect on hover */}
+                            {/* 4. Agregamos onClick al contenedor principal */}
+                            <div 
+                                onClick={() => handleCardClick(index)}
+                                className="group cursor-pointer p-4 relative overflow-hidden transition-all duration-300"
+                            >
+                                {/* Decorative gradient background effect on hover OR active */}
                                 <div
-                                    className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
+                                    className={`absolute inset-0 transition-opacity duration-500 pointer-events-none ${
+                                        isActive ? 'opacity-20' : 'opacity-0 group-hover:opacity-20'
+                                    }`}
                                     style={{ background: `radial-gradient(circle at center, ${theme.primary}, transparent 70%)` }}
                                 ></div>
 
@@ -79,7 +99,14 @@ const ExperienceTimeline: React.FC = () => {
                                 </p>
 
                                 {/* Expanded Details */}
-                                <div className="max-h-0 opacity-0 group-hover:max-h-[500px] group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden relative z-10">
+                                {/* 5. Lógica condicional: Se muestra si es hover (group-hover) O si está activo (isActive) */}
+                                <div 
+                                    className={`transition-all duration-500 ease-in-out overflow-hidden relative z-10 ${
+                                        isActive 
+                                            ? 'max-h-[500px] opacity-100' 
+                                            : 'max-h-0 opacity-0 group-hover:max-h-[500px] group-hover:opacity-100'
+                                    }`}
+                                >
                                     <ul className="space-y-2 mt-3 pt-3 border-t" style={{ borderColor: theme.shadow }}>
                                         {item.description.slice(1).map((desc, i) => (
                                             <li key={i} className="flex items-start gap-2 text-xs text-secondary leading-relaxed">

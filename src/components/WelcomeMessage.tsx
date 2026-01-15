@@ -10,7 +10,7 @@ const WelcomeMessage: React.FC = () => {
         const timer = setTimeout(() => {
             setIsVisible(false);
             window.dispatchEvent(new Event('launch-complete'));
-        }, 3500);
+        }, 3500);       
 
         return () => {
             document.body.classList.remove('overflow-hidden');
