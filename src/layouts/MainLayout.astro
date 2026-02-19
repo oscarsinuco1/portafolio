@@ -37,7 +37,10 @@ const {
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link rel="icon" type="image/x-icon" href="/portafolio/icons/favicon.ico" />
@@ -51,7 +54,9 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body class="transition-colors duration-300 relative bg-scanlines overflow-hidden">
+  <body
+    class="transition-colors duration-300 relative bg-scanlines overflow-hidden"
+  >
     <Starfield client:load />
     <WelcomeMessage client:load />
     <div class="opacity-0 pointer-events-none" id="main-content">
@@ -75,13 +80,20 @@ const {
               class="hidden md:flex items-center space-x-8 text-sm font-medium text-base"
             >
               <li>
-                <a class="hover:text-primary transition-colors" href="#experience">Experiencia</a>
+                <a
+                  class="hover:text-primary transition-colors"
+                  href="#experience">Experiencia</a
+                >
               </li>
               <li>
-                <a class="hover:text-primary transition-colors" href="#projects">Proyectos</a>
+                <a class="hover:text-primary transition-colors" href="#projects"
+                  >Proyectos</a
+                >
               </li>
               <li>
-                <a class="hover:text-primary transition-colors" href="#skills">Habilidades</a>
+                <a class="hover:text-primary transition-colors" href="#skills"
+                  >Habilidades</a
+                >
               </li>
               <li>
                 <a
@@ -112,7 +124,7 @@ const {
     <script>
       // 1. Launch Animation
       let launchCompleted = false;
-      
+
       const showContent = () => {
         if (launchCompleted) return;
         launchCompleted = true;
@@ -126,12 +138,12 @@ const {
           }, 100);
         }
       };
-      
+
       window.addEventListener("launch-complete", showContent);
-      
+
       // Safety timeout: mostrar contenido después de 7 segundos máximo
-      setTimeout(showContent, 7000);
-      
+      setTimeout(showContent, 2000);
+
       // Mostrar inmediatamente si la página viene del bfcache
       window.addEventListener("pageshow", (event) => {
         if (event.persisted) {
@@ -140,14 +152,14 @@ const {
       });
 
       // 2. Scroll Logic (Simplificada)
-      const header = document.getElementById('navbar');
-      
-      window.addEventListener('scroll', () => {
+      const header = document.getElementById("navbar");
+
+      window.addEventListener("scroll", () => {
         if (!header) return;
         if (window.scrollY > 10) {
-          header.classList.add('scrolled');
+          header.classList.add("scrolled");
         } else {
-          header.classList.remove('scrolled');
+          header.classList.remove("scrolled");
         }
       });
     </script>
