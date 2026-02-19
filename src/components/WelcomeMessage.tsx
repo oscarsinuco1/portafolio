@@ -1,20 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaRocket } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const WelcomeMessage: React.FC = () => {
     const [isVisible, setIsVisible] = useState(true);
+    const hasCompletedRef = useRef(false);
+
+    const completeLaunch = () => {
+        if (hasCompletedRef.current) return;
+        hasCompletedRef.current = true;
+        setIsVisible(false);
+        window.dispatchEvent(new Event('launch-complete'));
+    };
 
     useEffect(() => {
         document.body.classList.add('overflow-hidden');
-        const timer = setTimeout(() => {
-            setIsVisible(false);
-            window.dispatchEvent(new Event('launch-complete'));
-        }, 3500);       
+        
+        // Timer principal de la animación (3.5s)
+        const mainTimer = setTimeout(() => {
+            completeLaunch();
+        }, 3500);
+        
+        // Safety timeout de respaldo (6s máximo) por si hay problemas con el bfcache
+        const safetyTimer = setTimeout(() => {
+            completeLaunch();
+        }, 6000);
+
+        // Manejar el evento pageshow para detectar si viene del bfcache
+        const handlePageShow = (event: PageTransitionEvent) => {
+            if (event.persisted) {
+                // La página viene del bfcache, forzar completación inmediata
+                completeLaunch();
+            }
+        };
+
+        window.addEventListener('pageshow', handlePageShow);
 
         return () => {
             document.body.classList.remove('overflow-hidden');
-            clearTimeout(timer);
+            clearTimeout(mainTimer);
+            clearTimeout(safetyTimer);
+            window.removeEventListener('pageshow', handlePageShow);
         };
     }, []);
 
@@ -31,6 +57,9 @@ const WelcomeMessage: React.FC = () => {
                             className="rocket-icon"
                             animate={{ y: [0, -12, 0], rotate: [0, 5, -5, 0] }}
                             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                            onClick={completeLaunch}
+                            style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                            title="Toca para saltar la animación"
                         >
                             <FaRocket />
                         </motion.div>
