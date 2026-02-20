@@ -8,31 +8,45 @@ const ThemeToggle: React.FC = () => {
 
     useEffect(() => {
         setMounted(true);
-        // Check initial theme
-        const stored = localStorage.getItem('theme');
-        const system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-        const current = stored || system;
+        try {
+            // Check initial theme
+            const stored = localStorage.getItem('theme');
+            const system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            const current = stored || system;
 
-        if (current === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+            if (current === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
 
-        if (stored) {
-            setTheme(stored as 'light' | 'dark');
-            document.documentElement.setAttribute('data-theme', stored);
-        } else {
-            // Default based on system or fallback
-            setTheme(current as 'light' | 'dark');
-            document.documentElement.setAttribute('data-theme', current);
+            if (stored) {
+                setTheme(stored as 'light' | 'dark');
+                document.documentElement.setAttribute('data-theme', stored);
+            } else {
+                // Default based on system or fallback
+                setTheme(current as 'light' | 'dark');
+                document.documentElement.setAttribute('data-theme', current);
+            }
+        } catch (e) {
+            // localStorage not available, use system preference or default to dark
+            const system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            setTheme(system);
+            document.documentElement.setAttribute('data-theme', system);
+            if (system === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
         }
     }, []);
 
     const toggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
         setTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
+        try {
+            localStorage.setItem('theme', newTheme);
+        } catch (e) {
+            // localStorage not available, ignore
+        }
         document.documentElement.setAttribute('data-theme', newTheme);
 
         if (newTheme === 'dark') {
