@@ -4,7 +4,6 @@ import "../styles/global.css";
 import ThemeToggle from "../components/ThemeToggle";
 import MobileMenu from "../components/MobileMenu";
 import Starfield from "../components/Starfield.tsx";
-import WelcomeMessage from "../components/WelcomeMessage.tsx";
 
 // Props que el layout puede recibir.
 export interface Props {
@@ -55,11 +54,10 @@ const {
     />
   </head>
   <body
-    class="transition-colors duration-300 relative bg-scanlines overflow-hidden"
+    class="transition-colors duration-300 relative bg-scanlines"
   >
     <Starfield client:load />
-    <WelcomeMessage client:load />
-    <div class="opacity-0 pointer-events-none" id="main-content">
+    <div id="main-content">
       <header
         id="navbar"
         class="sticky top-0 z-40 w-full flex-none border-b border-transparent"
@@ -122,36 +120,7 @@ const {
     </div>
 
     <script>
-      // 1. Launch Animation
-      let launchCompleted = false;
-
-      const showContent = () => {
-        if (launchCompleted) return;
-        launchCompleted = true;
-        const content = document.getElementById("main-content");
-        const body = document.body;
-        if (content) {
-          setTimeout(() => {
-            body.classList.remove("overflow-hidden");
-            content.classList.remove("opacity-0", "pointer-events-none");
-            content.classList.add("content-fade-in");
-          }, 100);
-        }
-      };
-
-      window.addEventListener("launch-complete", showContent);
-
-      // Safety timeout: mostrar contenido después de 7 segundos máximo
-      setTimeout(showContent, 3000);
-
-      // Mostrar inmediatamente si la página viene del bfcache
-      window.addEventListener("pageshow", (event) => {
-        if (event.persisted) {
-          showContent();
-        }
-      });
-
-      // 2. Scroll Logic (Simplificada)
+      // Scroll Logic
       const header = document.getElementById("navbar");
 
       window.addEventListener("scroll", () => {
